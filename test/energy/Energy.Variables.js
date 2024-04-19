@@ -1,10 +1,10 @@
 import { $ } from '@wdio/globals'
-import PageURLS from './hoodie.page.URLS.js';
+import EnergyURLS from './Energy.URLS.js';
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class GuestCheckoutPage extends PageURLS {
+class EnergyVariables extends EnergyURLS {
     /**
      * define selectors using getter methods
      */
@@ -13,4 +13,4 @@ class GuestCheckoutPage extends PageURLS {
     }
 }
 
-export default new GuestCheckoutPage();
+export default new EnergyVariables();

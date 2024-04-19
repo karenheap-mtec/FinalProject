@@ -1,10 +1,11 @@
 import { $ } from '@wdio/globals'
-import PageURLS from './consult.page.URLS.js';
+import TripsPage from './order.plaid.page.js';
+import PufferJacketURLS from './puffer.jacket.URLS.js';
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class SelectApptPage extends PageURLS {
+class PufferJacketURLS extends PufferJacketURLS {
     /**
      * define selectors using getter methods
      */
@@ -13,4 +14,4 @@ class SelectApptPage extends PageURLS {
     }
 }
 
-export default new SelectApptPage();
+export default new PufferJacketURLS();

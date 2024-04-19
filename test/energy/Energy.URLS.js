@@ -4,21 +4,13 @@ import { browser } from '@wdio/globals'
 * main page object containing all methods, selectors and functionality
 * that is shared across all page objects
 */
-export default class PageURLS {
+export default class EnergyURLS {
     /**
     * Opens a sub page of the page
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
     open (path) {
-        return browser.url(`www.tesla.com`)
-    }
-
-    get modelYOrderPage () {
-        return `https://www.tesla.com/modely/design#overview`
-    }
-    
-    get paymentPage () {
-        return `https://www.tesla.com/modely/design#payment`
+        return browser.url(`https://www.tesla.com/energy/design`)
     }
 
 }

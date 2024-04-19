@@ -1,10 +1,10 @@
 import { $ } from '@wdio/globals'
-import PageURLS from './hoodie.page.URLS.js';
+import ZipPageURLS from './Zip.Page.URLS.js';
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class ViewCartPage extends PageURLS {
+class ZipcodeVariables extends ZipPageURLS {
     /**
      * define selectors using getter methods
      */
@@ -13,4 +13,4 @@ class ViewCartPage extends PageURLS {
     }
 }
 
-export default new ViewCartPage();
+export default new ZipcodeVariables();

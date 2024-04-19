@@ -1,10 +1,10 @@
 import { $ } from '@wdio/globals'
-import PageURLS from 'page.URLS.js';
+import TripsPage from 'page.URLS.js';
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class ModelYOrderPage extends PageURLS {
+class TripsVariables extends TripsPage {
     /**
      * define selectors using getter methods
      */
@@ -38,4 +38,4 @@ class ModelYOrderPage extends PageURLS {
     }
 }
 
-export default new ModelYOrderPage();
+export default new TripsVariables();
