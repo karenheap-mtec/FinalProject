@@ -1,6 +1,5 @@
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
-import ZipPageURLS from '../zipcode/Zipcode.Page.Files.js'
 
 
 describe('zipcode test', () => {
