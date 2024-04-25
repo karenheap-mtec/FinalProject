@@ -1,34 +1,12 @@
-import { $ } from '@wdio/globals'
-import { expect } from '@wdio/globals'
-import { browser } from '@wdio/globals'
 import ZipcodePage from '../zipcode/Zipcode.Page.Files.js'
-
 
 describe('zipcode test', () => {
     it('testing the zipcode component in all the ways', async () => {
         ZipcodePage.open()
         await ZipcodePage.executeZipcodeTest()
-    
-        // await $('.zipcode-modal-container .tds-link').click()
-        // await $('input[placeholder="Zip Code"]').setValue('84005')
-        // await $('button.tds-btn').click()
-        // await $('.location-card-container .location-card p').getText()
-        
-        // await expect($('.location-card-container .location-card p')).toHaveText('UT')
-
-        // await $('.zipcode-modal-container .tds-link').click()
-        // await $('input[placeholder="Zip Code"]').setValue('84005-1234')    
-        // await $('button.tds-btn').click()
-        // await $('.location-card-container .location-card p').getText()
-        
-        // await expect($('.location-card-container .location-card p')).toHaveText('UT')
-
-        // await $('.zipcode-modal-container .tds-link').click()
-        // await $('input[placeholder="Zip Code"]').setValue('840051234')
-
-        // await expect($('.input-feedback')).toHaveText('zip code format:')
+        await ZipcodePage.executeZipcodeTestPlus4()
+        await ZipcodePage.executeZipCodeTestTooLong()
 
     })
-
     
 })

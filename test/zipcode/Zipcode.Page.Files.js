@@ -2,8 +2,10 @@ import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
 
-const ZipCodeArray = ['20705', '15701', '36532', '08816', '60452', '19020', '98801', '08060', '60060', '11729', '08648', '15601', '01701', '08844', '30705', '10301', '37205', '10573', '27587', '06514', '21244', '06512', '06010', '60046', '32065', '60148', '44077', '07728', '40165', '60187', '21044', '60048', '59601', '33009', '03301', '75126', '30047', '01906', '21234', '59715', '06095', '42301', '78023', '07087', '67037', '11419', '60073', '44052', '97603', '32404']
-const StateArray = ['MD', 'PA', 'FL', 'NJ', 'IL', 'PA', 'WA', 'NJ', 'IL', 'NY', 'NJ', 'PA', 'MA', 'NJ', 'GA', 'NY', 'TN', 'NY', 'NC', 'CT', 'MD', 'CT', 'CT', 'IL', 'FL', 'IL', 'OH', 'NJ', 'KY', 'IL', 'MD', 'IL', 'MT', 'FL', 'NH', 'TX', 'GA', 'MA', 'MD', 'MT', 'CT', 'KY', 'TX', 'NJ', 'KS', 'NY', 'IL', 'OH', 'OR', 'FL'];
+const ZipCodeArray = ['35203', '85001', '72201', '90001', '80202', '06101', '19801', '33101', '30301'];
+const StateArray = ['GA', 'AZ', 'TN', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI'];
+const ZipCodeArrayPlus4 = ['35203-1234', '85001-1234', '72201-1234', '90001-1234', '80202-1234', '06101-1234', '19801-1234', '33101-1234', '30301-1234']
+const StateArrayPlus4 = ['GA', 'AZ', 'TN', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI'];
 
 class ZipcodePage {
     open () {
@@ -26,6 +28,10 @@ class ZipcodePage {
         return $('div.location-card span')
     }
 
+    get ZipTooLong () {
+        return $('.input-feedback')
+    }
+
     async executeZipcodeTest () {
         for (let i = 0; i < ZipCodeArray.length; i++){
             await this.ZipCodeBox.click()
@@ -36,6 +42,24 @@ class ZipcodePage {
             await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${StateArray[i]} `));
             
         }
+    }
+
+    async executeZipcodeTestPlus4 () {
+        for (let i = 0; i < ZipCodeArrayPlus4.length; i++){
+            await this.ZipCodeBox.click()
+            await this.EnterZipcode.setValue(ZipCodeArrayPlus4[i])
+            await this.ConfirmBtn.click()
+            await expect(this.VerifyState).toBeClickable()
+
+            await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${StateArrayPlus4[i]} `));
+            
+        }
+    }
+
+    async executeZipCodeTestTooLong (){
+            await this.ZipCodeBox.click()
+            await this.EnterZipcode.setValue('84058678932')
+            await expect (this.ZipTooLong).toBeExisting()
     }
 
 }
