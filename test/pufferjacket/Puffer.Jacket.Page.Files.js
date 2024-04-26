@@ -8,7 +8,8 @@ class PufferJacketPage {
     }
 
     get SizeXS () {
-        return $('label[for="XS1740535-00-A"]')
+        //return $('//div[input[@id="XS1740535-00-A"]]')
+        return $('#XS1740535-00-A')
     }
 
     get BtnAddToCart () {
@@ -16,7 +17,7 @@ class PufferJacketPage {
     }
 
     get SizeS () {
-        return $('input[value="S"]')
+        return $('//div[input[@id="XS1740536-00-A"]]')
     }
 
     get BtnViewCart () {
@@ -28,8 +29,8 @@ class PufferJacketPage {
     }
 
     async addAllItemsToCart () {
-            await this.PufferJacketPage.SizeXS.click()
-            await this.PufferJacketPage.click()
+            await this.SizeXS.click()
+            await this.BtnAddToCart.click()
             await this.SizeS.click()
             await this.BtnAddToCart.click()
             await this.BtnViewCart.click()
