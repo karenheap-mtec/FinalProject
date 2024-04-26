@@ -1,16 +1,40 @@
 import { browser } from '@wdio/globals'
+import { $ } from '@wdio/globals'
 
-/**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
-export default class TripsPageFiles {
-    /**
-    * Opens a sub page of the page
-    * @param path path of the sub page (e.g. /path/to/page.html)
-    */
-    open (path) {
+class TripsPage {
+  
+    open () {
         return browser.url(`https://www.tesla.com/trips`)
     }
 
+    get EnterLocation () {
+        return $('input[placeholder="Enter location"]')
+    }
+
+    get SelectCorrectLocation () {
+        return $('#autocomplete li:first-child')
+    }
+
+    get EnterDestination () {
+        return $('input[placeholder="Enter destination"]')
+    }
+
+    get SelectDestination () {
+        return $('#autocomplete li:first-child')
+    }
+
+    get Route () {
+        return $('.route_container')
+    }
+
+    async getRoute () {
+        await this.EnterLocation.setValue('84005')
+        await this.SelectCorrectLocation.click()
+        await this.EnterLocation.setValue('80301')
+        await this.SelectCorrectLocation.click()
+        await this.Route.click()
+    }
+
 }
+
+export default new TripsPage();

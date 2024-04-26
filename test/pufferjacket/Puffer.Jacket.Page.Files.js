@@ -8,9 +8,10 @@ class PufferJacketPage {
     }
 
     get SizeXS () {
-        //return $('//div[input[@id="XS1740535-00-A"]]')
-        return $('#XS1740535-00-A')
-    }
+       // return $('#XS1740535-00-A');
+        //var htmlContent = $('div input#XS1740535-00-A').getHTML();
+        return $('.product-form.size-1740535-00-A');
+        }
 
     get BtnAddToCart () {
         return $('input[value="Add to Cart"]')
@@ -35,7 +36,7 @@ class PufferJacketPage {
             await this.BtnAddToCart.click()
             await this.BtnViewCart.click()
             await expect(this.InsideCart).toHaveText('Puffer Jacket')
-        }
     }
+}
 
 export default new PufferJacketPage();
