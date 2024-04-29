@@ -1,8 +1,10 @@
 import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 
+const LocationArray = ['84005', '35203', '85001', '72201', '90001', '80202', '06101', '19801', '33101', '30301'];
+const DestinationArray = ['41208', '54727', '11401', '92856', '48625', '31286', '27311', '55306', '54455', '84005']
+
 class TripsPage {
-  
     open () {
         return browser.url(`https://www.tesla.com/trips`)
     }
@@ -11,8 +13,8 @@ class TripsPage {
         return $('input[placeholder="Enter location"]')
     }
 
-    get SelectCorrectLocation () {
-        return $('#autocomplete li:first-child')
+    get SelectLocation () {
+        return $("#autocomplete > li:nth-child(1) > i")
     }
 
     get EnterDestination () {
@@ -20,21 +22,30 @@ class TripsPage {
     }
 
     get SelectDestination () {
-        return $('#autocomplete li:first-child')
+        return $("#autocomplete > li:nth-child(1) > i")
     }
 
-    get Route () {
-        return $('.route_container')
+    get RouteBtn () {
+        return $('button[type="button"]')
     }
 
     async getRoute () {
-        await this.EnterLocation.setValue('84005')
-        await this.SelectCorrectLocation.click()
-        await this.EnterLocation.setValue('80301')
-        await this.SelectCorrectLocation.click()
-        await this.Route.click()
+        for (let i = 0; i < LocationArray.length; i++){
+            await this.EnterLocation.setValue(LocationArray[i])
+            await this.SelectLocation.click()
+            await this.EnterDestination.setValue(DestinationArray[i])
+            await this.SelectDestination.click()
+            await this.RouteBtn.click()
+            await this.open()
+        }
     }
 
+
+    async getRouteBlank (){
+        //await expect(this.RouteBtn).toBeDisabled()
+        await expect(this.RouteBtn).not.toBeEnabled()
+    }
+    
 }
 
 export default new TripsPage();

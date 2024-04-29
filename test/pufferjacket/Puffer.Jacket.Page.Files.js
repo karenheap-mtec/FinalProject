@@ -3,6 +3,9 @@ import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
 
 const SizeXSSelector = '#XS1740535-00-A'
+const SizeSSelector = '#S1740536-00-A'
+const SizeLSelector = '#1740538-00-A'
+const SizeXLSelector = '#XL1740539-00-A'
 
 class PufferJacketPage {
     open () {
@@ -24,7 +27,7 @@ class PufferJacketPage {
     }
 
     get SizeS () {
-        return $('//div[input[@id="XS1740536-00-A"]]')
+        return $('//div[input[@id="S1740536-00-A"]]')
     }
 
     get SizeM () {
@@ -41,35 +44,74 @@ class PufferJacketPage {
 
     get BtnViewCart () {
         return $('a[aria-label="See your cart"]')
-        //return $('use[href="#tds-icon-cart"]')
     }
 
     get InsideCart () {
         return $('#2-1740535-00-A')
     }
 
+    get AddMaxQuantity () {
+        return $('div.tds-form-input-text')
+    }
+
+    get Error () {
+        return $('.selection-error')
+    }
+
     async addAllItemsToCart () {
-            //document.querySelector('#XS1740535-00-A').click()
-            //await this.SizeXS.waitForExist({ timeout: 5000 });
             browser.execute(() => {
                 document.querySelector(SizeXSSelector).click();
              });
-             //await this.SizeXS.click()
             await this.BtnAddToCart.click()
-            // // waitforexist here
-            // await this.SizeS.click()
-            // await this.BtnAddToCart.click()
-            // // waitforexist here
-            // await this.SizeM.click()
-            // await this.BtnAddToCart.click()
-            // // waitforexist here
-            // await this.sizeL.click()
-            // await this.BtnAddToCart.click()
-            // // waitforexist here
-            // await this.sizeXL.click()
-            // await this.BtnAddToCart.click() 
-             await this.BtnViewCart.click()
-             //await expect(this.InsideCart).toHaveText('Puffer Jacket')
+            browser.execute(() => {
+                document.querySelector(SizeSSelector).click();
+             });
+            await this.BtnAddToCart.click()
+            browser.execute(() => {
+                document.querySelector(SizeLSelector).click();
+             });
+            await this.BtnAddToCart.click()
+             browser.execute(() => {
+                document.querySelector(SizeXLSelector).click();
+             });
+            await this.BtnAddToCart.click()
+    }
+
+    async maxQuantityToCart () {
+        browser.execute(() => {
+            document.querySelector(SizeXSSelector).click();
+         });
+        browser.execute(() => {
+            document.querySelector(this.AddMaxQuantity).setValue('5');
+         });
+            await this.BtnAddToCart.click()
+        browser.execute(() => {
+            document.querySelector(SizeSSelector).click();
+         });
+         browser.execute(() => {
+            document.querySelector(this.AddMaxQuantity).setValue('5');
+         });
+            await this.BtnAddToCart.click()
+        browser.execute(() => {
+            document.querySelector(SizeLSelector).click();
+         });
+        browser.execute(() => {
+            document.querySelector(this.AddMaxQuantity).setValue('5');
+         });
+            await this.BtnAddToCart.click()
+        browser.execute(() => {
+            document.querySelector(SizeXLSelector).click();
+         });
+        browser.execute(() => {
+            document.querySelector(this.AddMaxQuantity).setValue('5');
+         });
+            await this.BtnAddToCart.click()
+    }
+
+    async noAddToCart () {
+        await this.BtnAddToCart.click()
+        await expect (this.Error).toBeExisting()
+        await this.BtnViewCart.click()
     }
 }
 
