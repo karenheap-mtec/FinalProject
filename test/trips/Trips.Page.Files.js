@@ -14,7 +14,9 @@ class TripsPage {
     }
 
     get SelectLocation () {
-        return $("#autocomplete > li:nth-child(1) > i")
+        //return $('(//ul[@class="autocomplete--dropdown"]/li)[1]')
+        return $('#autocomplete')
+        // .autocomplete--dropdown > li')
     }
 
     get EnterDestination () {
@@ -22,18 +24,26 @@ class TripsPage {
     }
 
     get SelectDestination () {
-        return $("#autocomplete > li:nth-child(1) > i")
+        //return $('(//ul[@class="autocomplete--dropdown"]/li)[1]')
+        return $('#autocomplete')
+        // .autocomplete--dropdown > li')
     }
 
     get RouteBtn () {
         return $('button[type="button"]')
     }
 
+    get DisabledBtn () {
+        return $('//button[@disabled][contains(text(), "Get Route")]')
+    }
+
     async getRoute () {
         for (let i = 0; i < LocationArray.length; i++){
             await this.EnterLocation.setValue(LocationArray[i])
+            await (this.SelectLocation).waitForExist(1000)
             await this.SelectLocation.click()
             await this.EnterDestination.setValue(DestinationArray[i])
+            await (this.SelectDestination).waitForExist(1000)
             await this.SelectDestination.click()
             await this.RouteBtn.click()
             await this.open()
@@ -42,8 +52,14 @@ class TripsPage {
 
 
     async getRouteBlank (){
-        //await expect(this.RouteBtn).toBeDisabled()
-        await expect(this.RouteBtn).not.toBeEnabled()
+        await expect(this.DisabledBtn).toExist()
+        try {
+            await this.DisabledBtn.click()
+        } catch {
+            await expect(this.DisabledBtn).toExist()
+            
+        }
+
     }
     
 }
