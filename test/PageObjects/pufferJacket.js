@@ -2,44 +2,33 @@ import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
 
-const SizeXSSelector = '#XS1740535-00-A'
-const SizeSSelector = '#S1740536-00-A'
-const SizeLSelector = '#1740538-00-A'
-const SizeXLSelector = '#XL1740539-00-A'
-
 class PufferJacketPage {
     open () {
         return browser.url(`https://shop.tesla.com/product/women_s-puffer-jacket?sku=1740535-00-A`)
     }
 
-    // get SizeXSSelector(){
-    //     return '#XS1740535-00-A'
-    // }
-
-    get SizeXSElement () {
-        return $(SizeXSSelector);
-        //var htmlContent = $('div input#XS1740535-00-A').getHTML();
-        //return $('.product-form.size-1740535-00-A');
-        }
-
     get BtnAddToCart () {
         return $('input[value="Add to Cart"]')
     }
 
+    get SizeXS () {
+        return $('#XS1740535-00-A')
+    }
+
     get SizeS () {
-        return $('//div[input[@id="S1740536-00-A"]]')
+        return $('#S1740536-00-A')
     }
 
     get SizeM () {
-
+        return $('#M1740537-00-A')
     }
 
-    get sizeL () {
-
+    get SizeL () {
+        return $('#1740538-00-A')
     }
 
-    get sizeXL () {
-
+    get SizeXL () {
+        return $('#XL1740539-00-A')
     }
 
     get BtnViewCart () {
@@ -58,49 +47,49 @@ class PufferJacketPage {
         return $('.selection-error')
     }
 
-    async addAllItemsToCart () {
+    async addAllItemsToCart () { 
+        browser.execute(() => {
+            document.querySelector(this.SizeXS).click();
+         });
+            await this.BtnAddToCart.click()   
             browser.execute(() => {
-                document.querySelector(SizeXSSelector).click();
+                document.querySelector(this.SizeS).click();
              });
             await this.BtnAddToCart.click()
             browser.execute(() => {
-                document.querySelector(SizeSSelector).click();
+                document.querySelector(this.SizeL).click();
              });
             await this.BtnAddToCart.click()
             browser.execute(() => {
-                document.querySelector(SizeLSelector).click();
-             });
-            await this.BtnAddToCart.click()
-             browser.execute(() => {
-                document.querySelector(SizeXLSelector).click();
+                document.querySelector(this.SizeXL).click();
              });
             await this.BtnAddToCart.click()
     }
 
     async maxQuantityToCart () {
         browser.execute(() => {
-            document.querySelector(SizeXSSelector).click();
+            document.querySelector(this.SizeXS).click();
          });
         browser.execute(() => {
             document.querySelector(this.AddMaxQuantity).setValue('5');
          });
             await this.BtnAddToCart.click()
         browser.execute(() => {
-            document.querySelector(SizeSSelector).click();
+            document.querySelector(this.SizeS).click();
          });
          browser.execute(() => {
             document.querySelector(this.AddMaxQuantity).setValue('5');
          });
             await this.BtnAddToCart.click()
         browser.execute(() => {
-            document.querySelector(SizeLSelector).click();
+            document.querySelector(this.SizeL).click();
          });
         browser.execute(() => {
             document.querySelector(this.AddMaxQuantity).setValue('5');
          });
             await this.BtnAddToCart.click()
         browser.execute(() => {
-            document.querySelector(SizeXLSelector).click();
+            document.querySelector(this.SizeXL).click();
          });
         browser.execute(() => {
             document.querySelector(this.AddMaxQuantity).setValue('5');
