@@ -1,4 +1,4 @@
-import EnergyPage from '../test/PageObjects/energy.js'
+import EnergyPage from '../pageobjects/energy.js'
 
 describe('Entering contact information', () => {
     it('entering all information, accurate', async () => {

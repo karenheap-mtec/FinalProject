@@ -1,4 +1,4 @@
-import TripsPage from '../test/PageObjects/trips.js'
+import TripsPage from '../pageobjects/trips.js'
 
 describe('Trips Test', () => {
     it('Trip with 2 stops using 10 different locations', async () => {

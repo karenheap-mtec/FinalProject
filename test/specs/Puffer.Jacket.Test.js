@@ -1,4 +1,4 @@
-import PufferJacketPage from '../test/PageObjects/pufferJacket.js'
+import PufferJacketPage from '../pageobjects/pufferJacket.js'
 
 describe('Puffer jacket page testing adding to cart, etc', () => {
     it('test all the ways to add this to the cart', async () => {

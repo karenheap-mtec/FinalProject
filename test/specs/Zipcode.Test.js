@@ -1,4 +1,4 @@
-import ZipcodePage from '../test/PageObjects/zipcode.js'
+import ZipcodePage from '../pageobjects/zipcode.js'
 
 describe('zipcode test', () => {
     it('testing the zipcode component in all the ways', async () => {
