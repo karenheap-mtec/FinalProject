@@ -47,6 +47,8 @@ class PufferJacketPage {
         return $('.selection-error')
     }
 
+    //browser.execute used to wait for element to become interactable because it's behind a radio button
+
     async addAllItemsToCart () { 
         browser.execute(() => {
             document.querySelector(this.SizeXS).click();
