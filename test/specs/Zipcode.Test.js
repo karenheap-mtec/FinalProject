@@ -1,11 +1,11 @@
-import ZipcodePage from '../pageobjects/zipcode.js'
+import Zipcode from '../pageobjects/zipcode.js'
 
 describe('zipcode test', () => {
     it('testing the zipcode component in all the ways', async () => {
-        ZipcodePage.open()
-        await ZipcodePage.executeZipcodeTest()
-        await ZipcodePage.executeZipcodeTestPlus4()
-        await ZipcodePage.executeZipCodeTestTooLong()
+        Zipcode.open()
+        await Zipcode.executeZipcodeTest()
+        await Zipcode.executeZipcodeTestPlus4()
+        await Zipcode.executeZipCodeTestTooLong()
 
     })
     

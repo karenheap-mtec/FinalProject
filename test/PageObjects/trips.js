@@ -1,7 +1,7 @@
 import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 
-class TripsPage {
+class Trips {
 
     open () {
         return browser.url(`https://www.tesla.com/trips`)
@@ -11,6 +11,7 @@ class TripsPage {
         var LocationZips = ('84005', '35203', '85001', '72201', '90001', '80202', '06101', '19801', '33101', '30301')
         return LocationZips
     }
+
     get DestinationArray () {
         var DestinationZips = ('41208', '54727', '11401', '92856', '48625', '31286', '27311', '55306', '54455', '84005')
         return DestinationZips
@@ -67,4 +68,4 @@ class TripsPage {
 
 }
 
-export default new TripsPage();
+export default new Trips();

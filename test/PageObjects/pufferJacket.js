@@ -2,7 +2,7 @@ import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
 
-class PufferJacketPage {
+class PufferJacket {
     open () {
         return browser.url(`https://shop.tesla.com/product/women_s-puffer-jacket?sku=1740535-00-A`)
     }
@@ -106,4 +106,4 @@ class PufferJacketPage {
     }
 }
 
-export default new PufferJacketPage();
+export default new PufferJacket();

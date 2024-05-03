@@ -2,7 +2,7 @@ import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
 
-class EnergyPage {
+class Energy {
  
     open () {
         return browser.url(`https://www.tesla.com/energy/design`)
@@ -57,4 +57,4 @@ class EnergyPage {
 
 }
 
-export default new EnergyPage();
+export default new Energy();
