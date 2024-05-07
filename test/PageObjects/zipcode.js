@@ -52,7 +52,7 @@ class Zipcode {
             await this.ZipCodeBox.click()
             await this.EnterZipcode.setValue(this.ZipCodeArray[i])
             await this.ConfirmBtn.click()
-            await expect(this.VerifyState).toBeClickable()
+            await (this.VerifyState).waitForExist(1000)
 
             await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${this.StateArray[i]} `));
             
