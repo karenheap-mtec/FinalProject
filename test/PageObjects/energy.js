@@ -1,6 +1,7 @@
 import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
+import { Key } from 'webdriverio'
 
 class Energy {
  
@@ -9,13 +10,11 @@ class Energy {
     }
 
     get Address () {
-        //return $('#landing-page-installationAddress')
-        //return $(@id="landing-page-installationAddress")
-        return $('input[id="landing-page-installationAddress"]')
+        return $('#landing-page-installationAddress')
     }
 
     get SuggestedAddress () {
-        return $('input[name=":r1:"]')
+        return $('input[value="suggested"]')
     }
 
     get ElectricBill () {
@@ -26,46 +25,42 @@ class Energy {
         return $('#landing-page-next-btn')
     }
 
+    get PowerwallOnly () {
+        return $('#Powerwall')
+    }
+
     get Powerwall () {
         return $('#powerwall')
     }
 
-    get PowerwallOnly () {
-        return $('.tds-card-body')
-    }
-
-    get HomeSqFt () {
-        return $('#homeSqFt')
-    }
-
-    get NextBtnDisabled () {
-        return $('.tds-btn')
-    }
-
-    get OriginalAddress () {
-        return $('.tds-form-input-choice')
+    get SuggestionNextBtn () {
+        return $('button[data-test="suggestion-next-button"]')
     }
 
     async enterContactInfo () {
-        await this.Address.waitForExist(1000)
+        await this.Address.waitForExist(10000)
         await this.Address.setValue('9208 N Sunnyvale Dr, Eagle Mountain, UT 84005, USA')
+        await browser.keys(Key.Enter)
+        await this.SuggestedAddress.waitForExist(10000)
         await this.SuggestedAddress.click()
+        await this.SuggestionNextBtn.waitForExist(10000)
+        await this.SuggestionNextBtn.click()
+        await this.ElectricBill.waitForExist(10000)
         await this.ElectricBill.setValue('300')
         await this.PowerwallOnly.click()
-       // await this.NextBtn.waitForExist(1000)
+        await this.NextBtn.waitForExist(10000)
+        await this.NextBtn.waitForEnabled(10000)
         await this.NextBtn.click()
-        await expect(this.Powerwall)
+        await this.Powerwall.waitForExist(10000)
+        await expect(this.Powerwall).toExist()
 }
 
     async enterBadContactInfo () {
-      //  await this.Address.waitForExist(1000)
-        await this.Address.setValue('124 Third Street This Is')
-        await this.SuggestedAddress.click()
-        // await this.OriginalAddress.waitForExist(1000)
-        // await this.OriginalAddress.click()
-      //  await this.HomeSqFt.waitForExist(1000)
-        await this.HomeSqFt.setValue('2000')
-        await expect(this.NextBtnDisabled)
+        await this.Address.waitForExist(10000)
+        await this.Address.setValue('q')
+        await browser.keys(Key.Enter)
+        await this.SuggestionNextBtn.waitForExist(10000)
+        await expect (this.SuggestionNextBtn).toBeDisabled()
 }
 
 }

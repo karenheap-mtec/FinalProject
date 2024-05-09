@@ -8,12 +8,12 @@ class Trips {
     }
 
     get LocationArray () {
-        var LocationZips = ('84005', '35203', '85001', '72201', '90001', '80202', '06101', '19801', '33101', '30301')
+        var LocationZips = ['84005', '35203', '85001', '72201', '90001', '80202', '06101', '19801', '33101', '30301']
         return LocationZips
     }
 
     get DestinationArray () {
-        var DestinationZips = ('41208', '54727', '11401', '92856', '48625', '31286', '27311', '55306', '54455', '84005')
+        var DestinationZips = ['41208', '54727', '11401', '92856', '48625', '31286', '27311', '55306', '54455', '84005']
         return DestinationZips
     }
 
@@ -22,7 +22,7 @@ class Trips {
     }
 
     get SelectLocation () {
-        return $('#autocomplete')
+        return $('//*[@id="autocomplete"]/li[1]')
     }
 
     get EnterDestination () {
@@ -30,7 +30,7 @@ class Trips {
     }
 
     get SelectDestination () {
-        return $('#autocomplete')
+        return $('//*[@id="autocomplete"]/li[1]')
     }
 
     get RouteBtn () {
@@ -41,15 +41,23 @@ class Trips {
         return $('//button[@disabled][contains(text(), "Get Route")]')
     }
 
+    get DemoDrive () {
+        return $('.route__cta--test-drive')
+    }
+
     async getRoute () {
         for (let i = 0; i < this.LocationArray.length; i++){
             await this.EnterLocation.setValue(this.LocationArray[i])
-            await this.SelectLocation.waitForExist(1000)
+            //await this.EnterLocation.setValue('84058')
+
+            await this.SelectLocation.waitForExist(10000)
             await this.SelectLocation.click()
             await this.EnterDestination.setValue(this.DestinationArray[i])
-            await this.SelectDestination.waitForExist(1000)
+            await this.SelectDestination.waitForExist(10000)
             await this.SelectDestination.click()
             await this.RouteBtn.click()
+            await this.DemoDrive.waitForExist(10000)
+            await expect (this.DemoDrive).toExist()
             await this.open()
         }
     }

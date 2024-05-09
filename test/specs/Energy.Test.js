@@ -8,7 +8,8 @@ describe('Entering contact information', () => {
     })
 
     it('entering all information, inaccurate', async () => {
-    await EnergyPage.enterBadContactInfo()
+        EnergyPage.open()
+        await EnergyPage.enterBadContactInfo()
     
     })
 })
