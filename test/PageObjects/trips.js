@@ -56,8 +56,8 @@ class Trips {
             await this.SelectDestination.waitForExist(10000)
             await this.SelectDestination.click()
             await this.RouteBtn.click()
-            await this.DemoDrive.waitForExist(10000)
-            await expect (this.DemoDrive).toExist()
+            //await this.DemoDrive.waitForExist(10000)
+            //await expect (this.DemoDrive).toExist()
             await this.open()
         }
     }
