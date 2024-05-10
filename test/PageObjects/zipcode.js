@@ -52,9 +52,9 @@ class Zipcode {
             await this.ZipCodeBox.click()
             await this.EnterZipcode.setValue(this.ZipCodeArray[i])
             await this.ConfirmBtn.click()
-            //await (this.VerifyState).waitForExist(1000)
+            await this.VerifyState.waitForExist(1000)
 
-            //await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${this.StateArray[i]} `));
+            await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${this.StateArray[i]} `));
             
         }
     }
@@ -64,9 +64,9 @@ class Zipcode {
             await this.ZipCodeBox.click()
             await this.EnterZipcode.setValue(this.ZipCodeArrayPlus4[i])
             await this.ConfirmBtn.click()
-            //await expect(this.VerifyState).toBeClickable()
+            await expectthis.VerifyState.toBeClickable()
 
-            //await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${this.StateArrayPlus4[i]} `));
+            await expect(this.VerifyState).toHaveText(expect.stringContaining(`, ${this.StateArrayPlus4[i]} `));
             
         }
     }

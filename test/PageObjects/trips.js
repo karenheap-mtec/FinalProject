@@ -13,7 +13,7 @@ class Trips {
     }
 
     get DestinationArray () {
-        var DestinationZips = ['41208', '54727', '11401', '92856', '48625', '31286', '27311', '55306', '54455', '84005']
+        var DestinationZips = ['41208', '54727', '84005', '92856', '48625', '31286', '27311', '55306', '54455', '84005']
         return DestinationZips
     }
 
@@ -34,7 +34,7 @@ class Trips {
     }
 
     get RouteBtn () {
-        return $('button[type="button"]')
+        return $('.route__btn')
     }
 
     get DisabledBtn () {
@@ -45,23 +45,29 @@ class Trips {
         return $('.route__cta--test-drive')
     }
 
+    get Arrival () {
+        return $('.arrival')
+    }
+
     async getRoute () {
         for (let i = 0; i < this.LocationArray.length; i++){
-            await this.EnterLocation.setValue(this.LocationArray[i])
-            //await this.EnterLocation.setValue('84058')
-
+            //await this.EnterLocation.setValue(this.LocationArray[i])
+            await this.EnterLocation.click()
+            await browser.keys(this.LocationArray[i])
             await this.SelectLocation.waitForExist(10000)
+            await this.SelectLocation.waitForClickable(10000)
             await this.SelectLocation.click()
-            await this.EnterDestination.setValue(this.DestinationArray[i])
+            //await this.EnterDestination.setValue(this.DestinationArray[i])
+            await this.EnterDestination.click()
+            await browser.keys(this.DestinationArray[i])
             await this.SelectDestination.waitForExist(10000)
+            await this.SelectDestination.waitForClickable(10000)
             await this.SelectDestination.click()
             await this.RouteBtn.click()
-            //await this.DemoDrive.waitForExist(10000)
-            //await expect (this.DemoDrive).toExist()
+            await this.Arrival.waitForExist(10000)
             await this.open()
         }
     }
-
 
     async getRouteBlank (){
         await expect(this.DisabledBtn).toExist()
