@@ -49,22 +49,28 @@ class Trips {
         return $('.arrival')
     }
 
+    get LocationSelected () {
+        return $('//input[@data-short-address!=""][@placeholder="Enter location"]')
+    }
+
     async getRoute () {
         for (let i = 0; i < this.LocationArray.length; i++){
-            //await this.EnterLocation.setValue(this.LocationArray[i])
-            await this.EnterLocation.click()
-            await browser.keys(this.LocationArray[i])
-            await this.SelectLocation.waitForExist(10000)
-            await this.SelectLocation.waitForClickable(10000)
+            await this.EnterLocation.setValue(this.LocationArray[i])
+            await this.SelectLocation.waitForClickable({ timeout: 30000 })
+            //Had to use browser.pause because Tesla has a delay in adding the click event listener to the element after the element is clickable.
+            //Without the delay, the element click does nothing because the listener hasn't been added yet. I could find no other way to get past this barrier.
+            await browser.pause(100)
             await this.SelectLocation.click()
-            //await this.EnterDestination.setValue(this.DestinationArray[i])
-            await this.EnterDestination.click()
-            await browser.keys(this.DestinationArray[i])
-            await this.SelectDestination.waitForExist(10000)
-            await this.SelectDestination.waitForClickable(10000)
+            await this.LocationSelected.waitForExist({ timeout: 10000 })
+            await this.EnterDestination.setValue(this.DestinationArray[i])
+            await this.SelectDestination.waitForClickable({ timeout: 30000 })
+            //Had to use browser.pause because Tesla has a delay in adding the click event listener to the element after the element is clickable.
+            //Without the delay, the element click does nothing because the listener hasn't been added yet. I could find no other way to get past this barrier.
+            await browser.pause(100)
             await this.SelectDestination.click()
+            await this.RouteBtn.waitForClickable({ timeout: 30000 })
             await this.RouteBtn.click()
-            await this.Arrival.waitForExist(10000)
+            await this.Arrival.waitForExist({ timeout: 30000 })
             await this.open()
         }
     }
