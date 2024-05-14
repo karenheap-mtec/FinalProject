@@ -59,14 +59,16 @@ class Trips {
             await this.SelectLocation.waitForClickable({ timeout: 30000 })
             //Had to use browser.pause because Tesla has a delay in adding the click event listener to the element after the element is clickable.
             //Without the delay, the element click does nothing because the listener hasn't been added yet. I could find no other way to get past this barrier.
-            await browser.pause(100)
+            //await browser.pause(100)
+            await this.SelectLocation.moveTo()
             await this.SelectLocation.click()
             await this.LocationSelected.waitForExist({ timeout: 10000 })
             await this.EnterDestination.setValue(this.DestinationArray[i])
             await this.SelectDestination.waitForClickable({ timeout: 30000 })
             //Had to use browser.pause because Tesla has a delay in adding the click event listener to the element after the element is clickable.
             //Without the delay, the element click does nothing because the listener hasn't been added yet. I could find no other way to get past this barrier.
-            await browser.pause(100)
+            //await browser.pause(100)
+            await this.SelectDestination.moveTo()
             await this.SelectDestination.click()
             await this.RouteBtn.waitForClickable({ timeout: 30000 })
             await this.RouteBtn.click()
